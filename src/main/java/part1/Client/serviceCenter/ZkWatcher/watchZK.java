@@ -1,10 +1,10 @@
-package part2.Client.serviceCenter.ZkWatcher;
+package part1.Client.serviceCenter.ZkWatcher;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.ChildData;
 import org.apache.curator.framework.recipes.cache.CuratorCache;
 import org.apache.curator.framework.recipes.cache.CuratorCacheListener;
-import part2.Client.cache.serviceCache;
+import part1.Client.cache.serviceCache;
 
 /**
  * @author wxx
@@ -17,8 +17,7 @@ public class watchZK {
     //本地缓存
     serviceCache cache;
 
-
-    public watchZK(CuratorFramework client,serviceCache  cache){
+    public watchZK(CuratorFramework client, serviceCache cache){
         this.client=client;
         this.cache=cache;
     }

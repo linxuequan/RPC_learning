@@ -6,6 +6,7 @@ import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import part2.Client.cache.serviceCache;
 import part2.Client.serviceCenter.ZkWatcher.watchZK;
+import part2.Client.serviceCenter.balance.impl.ConsistencyHashBalance;
 
 import java.net.InetSocketAddress;
 import java.util.List;
@@ -20,6 +21,7 @@ public class ZKServiceCenter implements ServiceCenter{
     private CuratorFramework client;
     //zookeeper根路径节点
     private static final String ROOT_PATH = "MyRPC";
+    private static final String RETRY = "CanRetry";
     //serviceCache
     private serviceCache cache;
 
@@ -47,19 +49,35 @@ public class ZKServiceCenter implements ServiceCenter{
     public InetSocketAddress serviceDiscovery(String serviceName) {
         try {
             //先从本地缓存中找
-            List<String> serviceList=cache.getServcieFromCache(serviceName);
+            List<String> addressList=cache.getServiceListFromCache(serviceName);
             //如果找不到，再去zookeeper中找
             //这种i情况基本不会发生，或者说只会出现在初始化阶段
-            if(serviceList==null) {
-                serviceList=client.getChildren().forPath("/" + serviceName);
+            if(addressList==null) {
+                addressList=client.getChildren().forPath("/" + serviceName);
             }
-            // 这里默认用的第一个，后面加负载均衡
-            String string = serviceList.get(0);
-            return parseAddress(string);
+            // 负载均衡得到地址
+            String address = new ConsistencyHashBalance().balance(addressList);
+            return parseAddress(address);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+    //
+    public boolean checkRetry(String serviceName) {
+        boolean canRetry =false;
+        try {
+            List<String> serviceList = client.getChildren().forPath("/" + RETRY);
+            for(String s:serviceList){
+                if(s.equals(serviceName)){
+                    System.out.println("服务"+serviceName+"在白名单上，可进行重试");
+                    canRetry=true;
+                }
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return canRetry;
     }
     // 地址 -> XXX.XXX.XXX.XXX:port 字符串
     private String getServiceAddress(InetSocketAddress serverAddress) {

@@ -28,7 +28,7 @@ public class ServiceProvider {
         this.serviceRegister=new ZKServiceRegister();
     }
 
-    public void provideServiceInterface(Object service){
+    public void provideServiceInterface(Object service,boolean canRetry){
         String serviceName=service.getClass().getName();
         Class<?>[] interfaceName=service.getClass().getInterfaces();
 
@@ -36,7 +36,7 @@ public class ServiceProvider {
             //本机的映射表
             interfaceProvider.put(clazz.getName(),service);
             //在注册中心注册服务
-            serviceRegister.register(clazz.getName(),new InetSocketAddress(host,port));
+            serviceRegister.register(clazz.getName(),new InetSocketAddress(host,port),canRetry);
         }
     }
 
