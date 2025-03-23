@@ -7,12 +7,11 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
+import part1.Client.netty.nettyInitializer.NettyClientInitializer;
 import part1.Client.rpcClient.RpcClient;
-import part1.Client.serviceCenter.ServiceCenter;
-import part1.Client.serviceCenter.ZKServiceCenter;
 import part1.common.Message.RpcRequest;
 import part1.common.Message.RpcResponse;
-import part1.Client.netty.nettyInitializer.NettyClientInitializer;
+import part1.Client.serviceCenter.ServiceCenter;
 
 import java.net.InetSocketAddress;
 
@@ -27,8 +26,8 @@ public class NettyRpcClient implements RpcClient {
     private static final EventLoopGroup eventLoopGroup;
 
     private ServiceCenter serviceCenter;
-    public NettyRpcClient() throws InterruptedException {
-        this.serviceCenter=new ZKServiceCenter();
+    public NettyRpcClient(ServiceCenter serviceCenter) throws InterruptedException {
+        this.serviceCenter=serviceCenter;
     }
 
     //netty客户端初始化

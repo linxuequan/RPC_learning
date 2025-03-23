@@ -1,8 +1,8 @@
 package part1.common.service.Impl;
 
 
-import part1.common.service.UserService;
 import part1.common.pojo.User;
+import part1.common.service.UserService;
 
 import java.util.Random;
 import java.util.UUID;

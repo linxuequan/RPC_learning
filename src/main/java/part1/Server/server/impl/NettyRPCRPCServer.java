@@ -5,8 +5,8 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import lombok.AllArgsConstructor;
-import part1.Server.provider.ServiceProvider;
 import part1.Server.netty.nettyInitializer.NettyServerInitializer;
+import part1.Server.provider.ServiceProvider;
 import part1.Server.server.RpcServer;
 
 /**

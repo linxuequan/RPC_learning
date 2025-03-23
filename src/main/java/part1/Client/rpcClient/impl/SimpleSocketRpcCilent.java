@@ -1,8 +1,8 @@
 package part1.Client.rpcClient.impl;
 
 import part1.Client.rpcClient.RpcClient;
-import part1.common.Message.RpcRequest;
 import part1.common.Message.RpcResponse;
+import part1.common.Message.RpcRequest;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

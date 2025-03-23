@@ -17,7 +17,8 @@ public class watchZK {
     //本地缓存
     serviceCache cache;
 
-    public watchZK(CuratorFramework client, serviceCache cache){
+
+    public watchZK(CuratorFramework client,serviceCache  cache){
         this.client=client;
         this.cache=cache;
     }
