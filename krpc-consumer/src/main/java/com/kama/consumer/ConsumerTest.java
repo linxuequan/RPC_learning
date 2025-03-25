@@ -2,7 +2,6 @@ package com.kama.consumer;
 
 import com.kama.client.proxy.ClientProxy;
 import com.kama.pojo.User;
-
 import com.kama.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,7 +18,7 @@ import java.util.concurrent.Executors;
 @Slf4j
 public class ConsumerTest {
 
-    private static final int THREAD_POOL_SIZE = 20;
+    private static final int THREAD_POOL_SIZE = 30;
     private static final ExecutorService executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
 
     public static void main(String[] args) throws InterruptedException {

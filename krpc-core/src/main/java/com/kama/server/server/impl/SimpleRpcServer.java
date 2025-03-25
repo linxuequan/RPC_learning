@@ -1,12 +1,10 @@
 package com.kama.server.server.impl;
 
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.kama.server.provider.ServiceProvider;
 import com.kama.server.server.RpcServer;
 import com.kama.server.server.work.WorkThread;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.net.ServerSocket;

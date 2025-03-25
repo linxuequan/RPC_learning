@@ -1,15 +1,13 @@
 package com.kama.server.serviceRegister.impl;
 
 import com.kama.annotation.Retryable;
+import com.kama.server.serviceRegister.ServiceRegister;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.CreateMode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import com.kama.server.serviceRegister.ServiceRegister;
 
 import java.lang.reflect.Method;
 import java.net.InetSocketAddress;

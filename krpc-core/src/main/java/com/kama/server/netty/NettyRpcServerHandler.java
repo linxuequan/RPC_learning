@@ -1,6 +1,10 @@
 package com.kama.server.netty;
 
 
+import com.kama.server.provider.ServiceProvider;
+import com.kama.server.ratelimit.RateLimit;
+import com.kama.trace.interceptor.ServerTraceInterceptor;
+import common.message.RequestType;
 import common.message.RpcRequest;
 import common.message.RpcResponse;
 import io.netty.channel.ChannelFutureListener;
@@ -8,8 +12,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.kama.server.provider.ServiceProvider;
-import com.kama.server.ratelimit.RateLimit;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -33,8 +35,22 @@ public class NettyRpcServerHandler extends SimpleChannelInboundHandler<RpcReques
             log.error("接收到非法请求，RpcRequest 为空");
             return;
         }
-        RpcResponse response = getResponse(request);
-        ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
+        if(request.getType() == RequestType.HEARTBEAT){
+            log.info("接收到来自客户端的心跳包");
+            return;
+        }
+        if(request.getType() == RequestType.NORMAL) {
+            //trace记录
+            ServerTraceInterceptor.beforeHandle();
+
+            RpcResponse response = getResponse(request);
+            //ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
+
+            //trace上报
+            ServerTraceInterceptor.afterHandle(request.getMethodName());
+
+            ctx.writeAndFlush(response);
+        }
     }
 
     @Override

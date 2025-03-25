@@ -3,10 +3,7 @@ package com.kama.client.servicecenter.balance.impl;
 import com.kama.client.servicecenter.balance.LoadBalance;
 import lombok.extern.slf4j.Slf4j;
 
-
 import java.util.*;
-import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @ClassName ConsistencyHashBalance

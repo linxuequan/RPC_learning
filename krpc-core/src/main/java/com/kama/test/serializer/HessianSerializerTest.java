@@ -5,14 +5,6 @@ import common.exception.SerializeException;
 import common.serializer.myserializer.HessianSerializer;
 import org.junit.Test;
 
-/**
- * @ClassName HessianSerializerTest
- * @Description Hessian测试类
- * @Author Tong
- * @LastChangeDate 2024-12-05 15:21
- * @Version v5.0
- */
-import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class HessianSerializerTest {

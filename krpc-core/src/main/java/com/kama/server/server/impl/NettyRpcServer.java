@@ -1,16 +1,14 @@
 package com.kama.server.server.impl;
 
+import com.kama.server.netty.NettyServerInitializer;
+import com.kama.server.provider.ServiceProvider;
+import com.kama.server.server.RpcServer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import com.kama.server.netty.NettyServerInitializer;
-import com.kama.server.provider.ServiceProvider;
-import com.kama.server.server.RpcServer;
 
 /**
  * @ClassName NettyRpcServer

@@ -3,7 +3,6 @@ package common.serializer.myserializer;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
-
 import com.kama.pojo.User;
 import common.exception.SerializeException;
 

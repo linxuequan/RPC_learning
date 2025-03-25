@@ -4,7 +4,6 @@ import com.kama.client.rpcclient.RpcClient;
 import common.message.RpcRequest;
 import common.message.RpcResponse;
 
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
